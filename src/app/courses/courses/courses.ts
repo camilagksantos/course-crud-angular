@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../model/course';
+import { ICourse } from '../model/course';
+import { CoursesService } from '../services/coursesService';
+import { catchError, Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../../shared/components/undefined/error-dialog-component/error-dialog-component';
 
 @Component({
   selector: 'app-courses',
@@ -8,22 +12,27 @@ import { Course } from '../model/course';
   styleUrl: './courses.scss'
 })
 export class Courses implements OnInit {
-  courses: Course[] = [
-    { _id: '1', name: 'Angular Básico', category: 'Front-end' },
-    { _id: '2', name: 'Java Spring Boot', category: 'Back-end' },
-    { _id: '3', name: 'React Avançado', category: 'Front-end' },
-    { _id: '4', name: 'Python para Data Science', category: 'Data Science' },
-    { _id: '5', name: 'Docker e Kubernetes', category: 'DevOps' },
-    { _id: '6', name: 'Machine Learning', category: 'Data Science' },
-    { _id: '7', name: 'TypeScript Completo', category: 'Front-end' },
-    { _id: '8', name: 'Banco de Dados SQL', category: 'Banco de Dados' }
-  ];
+  courses$: Observable<ICourse[]>;
   displayedColumns: string[] = ['name', 'category'];
 
-  constructor() { 
+  constructor(
+    private readonly coursesService: CoursesService,
+    private readonly dialog: MatDialog
+  ) { 
+    this.courses$ = this.coursesService.list().pipe(
+      catchError(err => {
+        this.onError('Error loading courses');
+        return of([]);
+      })
+    );
   }
 
+  onError(errorMsg: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMsg
+    });
+  }
+  
   ngOnInit() { 
-    
   }
 }

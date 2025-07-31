@@ -15,3 +15,13 @@ table {
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.213);
     background-color: white;
 }
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; // espaço para centralizar
+    padding: 24px;
+    background-color: rgba(0, 0, 0, 0.05); // leve destaque
+    border-radius: 12px;
+}
