@@ -20,8 +20,21 @@ table {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 200px; // espaço para centralizar
+    min-height: 200px;
     padding: 24px;
-    background-color: rgba(0, 0, 0, 0.05); // leve destaque
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 12px;
+}
+
+.btn-add {
+    color: white;
+    background-color: #2196f3;
+}
+
+.btn-edit {
+    color: #757575;
+}
+
+.btn-delete {
+    color: #f44336;
 }

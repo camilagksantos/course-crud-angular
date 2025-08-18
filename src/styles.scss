@@ -2,19 +2,13 @@
 
 @include mat.core();
 
-html {
-  @include mat.theme((
-    color: (
-      primary: mat.$blue-palette,
-      accent: mat.$green-palette,
-      warn: mat.$red-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+$theme: mat.define-theme(());
 
+html {
+  @include mat.all-component-themes($theme);
+
+  height: 100%;
   color-scheme: light;
-  background-color: white;
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 }
@@ -26,5 +20,18 @@ html {
   ));
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  height: 100%;
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+::ng-deep body,
+::ng-deep .mat-app-background {
+  background-color: white !important;
+}
+
+.mat-mdc-progress-spinner circle,
+.mat-mdc-spinner circle {
+  stroke: #2196F3 !important; // mesma cor da toolbar
+}

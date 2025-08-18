@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-header>
+        <mat-toolbar>Detalhes do Curso</mat-toolbar>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="form">
+            <!--Name Column-->
+            <mat-form-field>
+                <input matInput placeholder="Nome" formControlName="name">
+            </mat-form-field>
+        
+            <!--Name Column-->
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select>
+                    @for (category of categories; track category) {
+                    <mat-option [value]="category.value">{{category.viewValue}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button class="btn-save" (click)="onSubmit()">Salvar</button>
+        <button mat-raised-button class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    </mat-card-actions>
+</mat-card>

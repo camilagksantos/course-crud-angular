@@ -7,17 +7,24 @@ import { delay, take, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class CoursesService {
-  // private readonly apiUrl = 'data/courses.json';
-  private readonly apiUrl = 'http://localhost:8080/api/courses';
+  private readonly apiUrl = 'data/courses.json';
+  // private readonly apiUrl = 'http://localhost:8080/api/courses';
 
   constructor(
-    private readonly httpClient: HttpClient,
+    private readonly httpClient: HttpClient
   ) { }
 
   list() { 
     return this.httpClient.get<ICourse[]>(this.apiUrl)
       .pipe(
         delay(3000),
+        take(1)
+      );
+  }
+
+  save(course: ICourse) {
+    return this.httpClient.post<ICourse>(this.apiUrl, course)
+      .pipe(
         take(1)
       );
   }
