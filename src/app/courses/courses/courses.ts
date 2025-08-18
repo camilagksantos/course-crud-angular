@@ -3,7 +3,7 @@ import { ICourse } from '../model/course';
 import { CoursesService } from '../services/coursesService';
 import { catchError, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../../../shared/components/undefined/error-dialog-component/error-dialog-component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog-component/error-dialog-component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class Courses {
     private readonly dialog: MatDialog,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute
-  ) { 
+  ) {
     // this.courses$ = this.coursesService.list().pipe(
     //   catchError(err => {
     //     this.onError('Error loading courses');
@@ -38,7 +38,7 @@ export class Courses {
         return of([]);
       })
     );
-   }
+  }
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {

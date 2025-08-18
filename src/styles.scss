@@ -33,5 +33,9 @@ body {
 
 .mat-mdc-progress-spinner circle,
 .mat-mdc-spinner circle {
-  stroke: #2196F3 !important; // mesma cor da toolbar
+  stroke: #2196F3 !important;
+}
+
+.mat-mdc-card {
+  background-color: white !important;
 }

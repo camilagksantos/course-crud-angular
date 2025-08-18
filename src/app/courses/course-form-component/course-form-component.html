@@ -10,10 +10,10 @@
                 <input matInput placeholder="Nome" formControlName="name">
             </mat-form-field>
         
-            <!--Name Column-->
+            <!--Ctaegory Column-->
             <mat-form-field>
                 <mat-label>Categoria</mat-label>
-                <mat-select>
+                <mat-select formControlName="category">
                     @for (category of categories; track category) {
                     <mat-option [value]="category.value">{{category.viewValue}}</mat-option>
                     }

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ICourse } from '../model/course';
 import { HttpClient } from '@angular/common/http';
-import { delay, take, tap } from 'rxjs';
+import { delay, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private readonly apiUrl = 'data/courses.json';
-  // private readonly apiUrl = 'http://localhost:8080/api/courses';
+  // private readonly apiUrl = 'data/courses.json';
+  private readonly apiUrl = 'http://localhost:8080/api/courses';
 
   constructor(
     private readonly httpClient: HttpClient
@@ -17,12 +17,12 @@ export class CoursesService {
   list() { 
     return this.httpClient.get<ICourse[]>(this.apiUrl)
       .pipe(
-        delay(3000),
+        delay(1000),
         take(1)
       );
   }
 
-  save(course: ICourse) {
+  save(course: ICourse): Observable<ICourse> {
     return this.httpClient.post<ICourse>(this.apiUrl, course)
       .pipe(
         take(1)
