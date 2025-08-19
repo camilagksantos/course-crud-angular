@@ -4,14 +4,14 @@
     </mat-card-header>
 
     <mat-card-content>
-        <form [formGroup]="form">
+        <form [formGroup]="form" class="min-width">
             <!--Name Column-->
-            <mat-form-field>
+            <mat-form-field class="full-width">
                 <input matInput placeholder="Nome" formControlName="name">
             </mat-form-field>
         
             <!--Ctaegory Column-->
-            <mat-form-field>
+            <mat-form-field class="full-width">
                 <mat-label>Categoria</mat-label>
                 <mat-select formControlName="category">
                     @for (category of categories; track category) {

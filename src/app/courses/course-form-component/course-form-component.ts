@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoursesService } from '../services/coursesService';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog-component/error-dialog-component';
@@ -34,30 +34,29 @@ export class CourseFormComponent {
     private readonly router: Router
   ) {
     this.form = this.formBuilder.group({
-      name: [null],
-      category: [null]
+      name: [null, Validators.required],
+      category: [null, Validators.required]
     });
   }
 
   onSubmit() {
     this.courseService.save(this.form.value)
       .subscribe({
-        next: (result) => {
-          this.dialog.open(SuccessDialogComponent, {
-            data: `Course "${result.name}" saved successfully!`
-          });
-
-          this.form.reset();
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          this.onError('Error saving course');
-          console.error(err);
-        }
+        next: (result) => this.onSuccess(result),
+        error: (err) => this.onError('Error saving course')
       });
   }
 
   onCancel() {
+    this.form.reset();
+    this.router.navigate(['/']);
+  }
+
+  onSuccess(result: any) {
+    this.dialog.open(SuccessDialogComponent, {
+      data: `Course "${result.name}" saved successfully!`
+    });
+
     this.form.reset();
     this.router.navigate(['/']);
   }

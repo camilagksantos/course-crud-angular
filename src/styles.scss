@@ -36,6 +36,11 @@ body {
   stroke: #2196F3 !important;
 }
 
-.mat-mdc-card {
+mat-card {
+  display: flex;
+  padding: 16px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.213);
+  border-radius: 4px;
   background-color: white !important;
+  text-align: center;
 }

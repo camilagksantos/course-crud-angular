@@ -1,21 +1,3 @@
-table {
-    width: 100%;
-}
-
-mat-card {
-    display: flex;
-    padding: 16px;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.213);
-    border-radius: 4px;
-    background-color: white;
-}
-
-table {
-    width: 100%;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.213);
-    background-color: white;
-}
-
 .spinner-container {
     display: flex;
     align-items: center;
@@ -26,15 +8,8 @@ table {
     border-radius: 12px;
 }
 
-.btn-add {
-    color: white;
-    background-color: #2196f3;
-}
-
-.btn-edit {
-    color: #757575;
-}
-
-.btn-delete {
-    color: #f44336;
+.column-flex {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
 }

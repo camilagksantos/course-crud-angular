@@ -7,12 +7,14 @@ import { Courses } from './courses/courses';
 import { SharedModuleModule } from '../../shared/shared-module-module';
 import { CourseFormComponent } from './course-form-component/course-form-component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CoursesListComponent } from './courses/component/courses-list-component/courses-list-component';
 
 
 @NgModule({
   declarations: [
     Courses,
-    CourseFormComponent
+    CourseFormComponent,
+    CoursesListComponent
   ],
   imports: [
     CommonModule,

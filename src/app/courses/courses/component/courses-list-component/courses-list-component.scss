@@ -1,0 +1,64 @@
+mat-table {
+    width: 100%;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.401);
+    background-color: white;
+
+    overflow: auto;
+    max-height: 600px;
+}
+
+.mat-column-name {
+    flex: 0 0 45%;
+    /* 45% da largura total */
+}
+
+.mat-column-category {
+    flex: 0 0 35%;
+    /* 35% da largura total */
+}
+
+.mat-column-actions {
+    flex: 0 0 20%;
+    /* 20% da largura total - menor para ações */
+    text-align: center;
+}
+
+.btn-add {
+    color: white;
+    background-color: #2196f3;
+}
+
+.btn-edit {
+    color: #757575;
+}
+
+.btn-delete {
+    color: #f44336;
+}
+
+@media (max-width: 768px) {
+    .mat-column-name {
+        flex: 0 0 40%;
+    }
+
+    .mat-column-category {
+        flex: 0 0 35%;
+    }
+
+    .mat-column-actions {
+        flex: 0 0 25%;
+    }
+}
+
+.mat-column-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-header-cell.mat-column-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

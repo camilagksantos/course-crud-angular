@@ -14,8 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class Courses {
 
-  courses$: Observable<ICourse[]> = of([]);;
-  displayedColumns: string[] = ['name', 'category', 'actions'];
+  courses$: Observable<ICourse[]> = of([]);
 
   constructor(
     private readonly coursesService: CoursesService,
