@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICourse } from '../../../model/course';
+import { ICourse } from '../../model/course';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 

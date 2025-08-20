@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoursesRoutingModule } from './courses-routing-module';
-import { Courses } from './courses/courses';
-import { CourseFormComponent } from './course-form-component/course-form-component';
-import { CoursesListComponent } from './courses/component/courses-list-component/courses-list-component';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material-module';
 import { SharedModuleModule } from '../../shared/shared-module-module';
+import { CourseFormComponent } from './components/course-form-component/course-form-component';
+import { CoursesListComponent } from './components/courses-list-component/courses-list-component';
+import { Courses } from './components/courses/courses';
 
 
 @NgModule({
