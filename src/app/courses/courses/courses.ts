@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICourse } from '../model/course';
 import { CoursesService } from '../services/coursesService';
 import { catchError, Observable, of } from 'rxjs';
@@ -21,14 +21,7 @@ export class Courses {
     private readonly dialog: MatDialog,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute
-  ) {
-    // this.courses$ = this.coursesService.list().pipe(
-    //   catchError(err => {
-    //     this.onError('Error loading courses');
-    //     return of([]);
-    //   })
-    // );
-  }
+  ) { }
 
   ngOnInit() {
     this.courses$ = this.coursesService.list().pipe(
@@ -50,11 +43,10 @@ export class Courses {
   }
 
   onEdit(course: ICourse): void {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
+    
   }
 
-  onDelete(course: ICourse): void {
-    console.log('Excluir curso', course);
-    // Exemplo: abrir um diálogo de confirmação, depois deletar via service
+    onDelete(course: ICourse): void {
+      
   }
 }

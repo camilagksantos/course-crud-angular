@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CoursesService } from '../services/coursesService';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog-component/error-dialog-component';
-import { ICategory } from '../model/category';
 import { Router } from '@angular/router';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog-component/error-dialog-component';
 import { SuccessDialogComponent } from '../../../shared/components/success-dialog-component/success-dialog-component';
+import { ICategory } from '../model/category';
+import { CoursesService } from '../services/coursesService';
+
 
 @Component({
   selector: 'app-course-form-component',
