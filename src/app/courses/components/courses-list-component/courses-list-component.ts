@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICourse } from '../../model/course';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list-component',
@@ -12,25 +11,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesListComponent {
 
   @Input() courses: ICourse[] = [];
+  @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
+  @Output() delete = new EventEmitter(false);
+
   readonly displayedColumns: string[] = ['name', 'category', 'actions'];
 
   constructor(
-    private readonly dialog: MatDialog,
-    private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly dialog: MatDialog
   ) {
   }
 
   onAdd(): void {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
+    this.add.emit(true);
   }
 
   onEdit(course: ICourse): void {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
+    this.edit.emit(course);
   }
 
   onDelete(course: ICourse): void {
-    console.log('Excluir curso', course);
-    // Exemplo: abrir um diálogo de confirmação, depois deletar via service
+    this.delete.emit(course);
   }
 }

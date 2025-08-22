@@ -8,6 +8,8 @@ import { SharedModuleModule } from '../../shared/shared-module-module';
 import { CourseFormComponent } from './components/course-form-component/course-form-component';
 import { CoursesListComponent } from './components/courses-list-component/courses-list-component';
 import { Courses } from './components/courses/courses';
+import { CoursesService } from './services/coursesService';
+import { CourseGuardResolver } from './guards/course-guard-resolver';
 
 
 @NgModule({
@@ -22,6 +24,10 @@ import { Courses } from './components/courses/courses';
     AngularMaterialModule,
     SharedModuleModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    CoursesService,
+    { provide: 'courseGuardResolver', useValue: CourseGuardResolver }
   ]
 })
 export class CoursesModule { }

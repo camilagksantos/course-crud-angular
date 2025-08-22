@@ -5,6 +5,9 @@
         <app-courses-list-component
             *ngIf=" courses$ | async as courses; else spinner"
             [courses]="courses"
+            (add)="onAdd()"
+            (edit)="onEdit($event)"
+            (delete)="onDelete($event)"
         ></app-courses-list-component>
         <ng-template #spinner>
             <div class="spinner-container">

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from '../../model/category';
 import { CoursesService } from '../../services/coursesService';
 import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog-component/error-dialog-component';
+import { ICourse } from '../../model/course';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { ErrorDialogComponent } from '../../../../shared/components/error-dialog
   styleUrl: './course-form-component.scss'
 })
 export class CourseFormComponent {
+
+  course!: ICourse;
 
   categories: ICategory[] = [
     { value: 'null', viewValue: '' },
@@ -32,7 +35,8 @@ export class CourseFormComponent {
     private readonly formBuilder: FormBuilder,
     private readonly courseService: CoursesService,
     private readonly dialog: MatDialog,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
@@ -40,11 +44,15 @@ export class CourseFormComponent {
     });
   }
 
+  ngOnInit() { 
+    this.course = this.route.snapshot.data['course'];
+  }
+
   onSubmit() {
     this.courseService.save(this.form.value)
       .subscribe({
         next: (result) => this.onSuccess(result),
-        error: (err) => this.onError('Error saving course')
+        error: (err) => this.onError('Error saving course'),
       });
   }
 

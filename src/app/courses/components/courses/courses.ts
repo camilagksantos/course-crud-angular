@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourse } from '../../model/course';
@@ -25,6 +25,7 @@ export class Courses {
 
   ngOnInit() {
     this.courses$ = this.coursesService.list().pipe(
+      tap(courses => console.log('Cursos carregados:', courses)), // log the loaded courses
       catchError(err => {
         this.onError('Error loading courses');
         return of([]);
@@ -42,11 +43,11 @@ export class Courses {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
 
-  onEdit(course: ICourse): void {
-    
+  onEdit(course: ICourse) {
+    this.router.navigate(['edit', course._id], { relativeTo: this.activatedRoute });
   }
 
-    onDelete(course: ICourse): void {
+  onDelete(course: ICourse): void {
       
   }
 }

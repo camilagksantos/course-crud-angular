@@ -7,6 +7,7 @@ import { delay, Observable, take, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class CoursesService {
+
   // private readonly apiUrl = 'data/courses.json';
   private readonly apiUrl = 'http://localhost:8080/api/courses';
 
@@ -27,5 +28,11 @@ export class CoursesService {
       .pipe(
         take(1)
       );
+  }
+
+  getById(id: string): Observable<ICourse> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.httpClient.get<ICourse>(url)
+      .pipe(take(1));
   }
 }
