@@ -23,16 +23,32 @@ export class CoursesService {
       );
   }
 
-  save(course: ICourse): Observable<ICourse> {
+  getById(id: string): Observable<ICourse> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.httpClient.get<ICourse>(url)
+      .pipe(take(1));
+  }
+
+  save(course: ICourse) {
+    if (course._id) {
+      return this.update(course);
+    } else {
+      return this.create(course);
+    }
+  }
+
+  create(course: ICourse): Observable<ICourse> {
     return this.httpClient.post<ICourse>(this.apiUrl, course)
       .pipe(
         take(1)
       );
   }
 
-  getById(id: string): Observable<ICourse> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.httpClient.get<ICourse>(url)
-      .pipe(take(1));
+  update(course: ICourse): Observable<ICourse> {
+    const url = `${this.apiUrl}/${course._id}`;
+    return this.httpClient.put<ICourse>(url, course)
+      .pipe(
+        take(1)
+      );
   }
 }
