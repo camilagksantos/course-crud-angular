@@ -17,15 +17,13 @@ import { ICourse } from '../../model/course';
 })
 export class CourseFormComponent {
 
-  course!: ICourse;
-
   categories: ICategory[] = [
     { value: 'null', viewValue: '' },
     { value: 'front-end', viewValue: 'Front-End' },
     { value: 'back-end', viewValue: 'Back-End' },
     { value: 'full-stack', viewValue: 'Full-Stack' },
     { value: 'mobile', viewValue: 'Mobile' },
-    { value: 'data science', viewValue: 'Data Science' },
+    { value: 'data-science', viewValue: 'Data Science' },
     { value: 'devops', viewValue: 'DevOps' }
   ];
 
@@ -39,13 +37,19 @@ export class CourseFormComponent {
     private readonly route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
+      _id: [null],
       name: [null, Validators.required],
       category: [null, Validators.required]
     });
   }
 
   ngOnInit() { 
-    this.course = this.route.snapshot.data['course'];
+    const course: ICourse = this.route.snapshot.data['course'];
+    this.form.setValue({
+      _id: course._id,
+      name: course.name,
+      category: course.category ? course.category.toLowerCase().replace(' ', '-') : ''
+    });
   }
 
   onSubmit() {
