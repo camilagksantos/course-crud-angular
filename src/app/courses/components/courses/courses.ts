@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourse } from '../../model/course';
 import { CoursesService } from '../../services/coursesService';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog-component/error-dialog-component';
+import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
 
 @Component({
   selector: 'app-courses',
@@ -49,13 +50,22 @@ export class Courses {
 
   onDelete(courseId: string): void {
     if (!courseId) return this.onError('Invalid course ID');
-    
-    this.coursesService.delete(courseId).subscribe(success => {
-      if (success) {
-        this.courses$ = this.coursesService.list();
-      } else {
-        this.onError('Error deleting course');
-      }
-    });
+
+    this.courses$ = this.coursesService.delete(courseId).pipe(
+      tap(success => {
+        if (success) {
+          this.dialog.open(SuccessDialogComponent, {
+            data: 'Course deleted successfully!'
+          });
+        } else {
+          throw new Error('Error deleting course');
+        }
+      }),
+      switchMap(() => this.coursesService.list()),
+      catchError(err => {
+        this.onError(err.message || 'Error deleting course');
+        return of([]);
+      })
+    );
   }
 }
