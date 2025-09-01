@@ -47,7 +47,15 @@ export class Courses {
     this.router.navigate(['edit', course._id], { relativeTo: this.activatedRoute });
   }
 
-  onDelete(course: ICourse): void {
-      
+  onDelete(courseId: string): void {
+    if (!courseId) return this.onError('Invalid course ID');
+    
+    this.coursesService.delete(courseId).subscribe(success => {
+      if (success) {
+        this.courses$ = this.coursesService.list();
+      } else {
+        this.onError('Error deleting course');
+      }
+    });
   }
 }

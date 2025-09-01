@@ -30,7 +30,7 @@ export class CoursesListComponent {
     this.edit.emit(course);
   }
 
-  onDelete(course: ICourse): void {
-    this.delete.emit(course);
+  onDelete(courseId: string): void {
+    this.delete.emit(courseId);
   }
 }
