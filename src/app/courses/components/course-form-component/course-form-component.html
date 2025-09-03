@@ -7,10 +7,23 @@
         <form [formGroup]="form" class="min-width">
             <!--Name Column-->
             <mat-form-field class="full-width">
-                <input matInput placeholder="Nome" formControlName="name">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name">
+
+                <mat-hint align="end">{{form.get('name')?.value?.length || 0}}/100</mat-hint>
+
+                @if (form.get('name')?.hasError('required')) {
+                <mat-error>Nome é obrigatório</mat-error>
+                }
+                @if (form.get('name')?.hasError('minlength')) {
+                <mat-error>Nome deve ter pelo menos 5 caracteres</mat-error>
+                }
+                @if (form.get('name')?.hasError('maxlength')) {
+                <mat-error>Nome não pode passar de 100 caracteres</mat-error>
+                }
             </mat-form-field>
         
-            <!--Ctaegory Column-->
+            <!--Category Column-->
             <mat-form-field class="full-width">
                 <mat-label>Categoria</mat-label>
                 <mat-select formControlName="category">
@@ -18,6 +31,10 @@
                         {{category.viewValue}}
                     </mat-option>
                 </mat-select>
+
+                @if (form.get('category')?.hasError('required')) {
+                <mat-error>Categoria é obrigatória</mat-error>
+                }
             </mat-form-field>
         </form>
     </mat-card-content>

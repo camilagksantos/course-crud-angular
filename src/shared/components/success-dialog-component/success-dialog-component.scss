@@ -1,0 +1,9 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: white !important;
+}
+
+::ng-deep .btn-close {
+    background-color: #2196f3 !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
+}

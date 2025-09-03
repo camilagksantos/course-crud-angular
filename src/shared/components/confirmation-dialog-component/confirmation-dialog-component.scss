@@ -1,0 +1,16 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: white !important;
+}
+
+::ng-deep .btn-confirm {
+    background-color: #f44336 !important; // Vermelho para ação perigosa
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
+    margin-left: 10px; // Espaçamento entre os botões
+}
+
+::ng-deep .btn-cancel {
+    background-color: #2196f3 !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
+}

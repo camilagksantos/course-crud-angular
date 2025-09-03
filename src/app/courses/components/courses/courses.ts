@@ -6,6 +6,7 @@ import { ICourse } from '../../model/course';
 import { CoursesService } from '../../services/coursesService';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog-component/error-dialog-component';
 import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
+import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog-component/confirmation-dialog-component';
 
 @Component({
   selector: 'app-courses',
@@ -51,21 +52,29 @@ export class Courses {
   onDelete(courseId: string): void {
     if (!courseId) return this.onError('Invalid course ID');
 
-    this.courses$ = this.coursesService.delete(courseId).pipe(
-      tap(success => {
-        if (success) {
-          this.dialog.open(SuccessDialogComponent, {
-            data: 'Course deleted successfully!'
-          });
-        } else {
-          throw new Error('Error deleting course');
-        }
-      }),
-      switchMap(() => this.coursesService.list()),
-      catchError(err => {
-        this.onError(err.message || 'Error deleting course');
-        return of([]);
-      })
-    );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Are you sure you want to delete this course?'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.courses$ = this.coursesService.delete(courseId).pipe(
+          tap(success => {
+            if (success) {
+              this.dialog.open(SuccessDialogComponent, {
+                data: 'Course deleted successfully!'
+              });
+            } else {
+              throw new Error('Error deleting course');
+            }
+          }),
+          switchMap(() => this.coursesService.list()),
+          catchError(err => {
+            this.onError(err.message || 'Error deleting course');
+            return of([]);
+          })
+        );
+      }
+    });
   }
 }

@@ -18,7 +18,7 @@ import { ICourse } from '../../model/course';
 export class CourseFormComponent {
 
   categories: ICategory[] = [
-    { value: 'null', viewValue: '' },
+    { value: '', viewValue: 'Selecione uma Categoria' },
     { value: 'front-end', viewValue: 'Front-End' },
     { value: 'back-end', viewValue: 'Back-End' },
     { value: 'full-stack', viewValue: 'Full-Stack' },
@@ -38,7 +38,7 @@ export class CourseFormComponent {
   ) {
     this.form = this.formBuilder.group({
       _id: [null],
-      name: [null, Validators.required],
+      name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       category: [null, Validators.required]
     });
   }
@@ -53,11 +53,16 @@ export class CourseFormComponent {
   }
 
   onSubmit() {
-    this.courseService.save(this.form.value)
-      .subscribe({
-        next: (result) => this.onSuccess(result),
-        error: (err) => this.onError('Error saving course'),
-      });
+    if (this.form.valid) {
+      this.courseService.save(this.form.value)
+        .subscribe({
+          next: (result) => this.onSuccess(result),
+          error: (err) => this.onError('Error saving course'),
+        });
+    } else {
+      this.form.markAllAsTouched();
+      this.onError('Please fill all required fields');
+    }
   }
 
   onCancel() {
