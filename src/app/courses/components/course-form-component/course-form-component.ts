@@ -19,12 +19,11 @@ export class CourseFormComponent {
 
   categories: ICategory[] = [
     { value: '', viewValue: 'Selecione uma Categoria' },
-    { value: 'front-end', viewValue: 'Front-End' },
-    { value: 'back-end', viewValue: 'Back-End' },
-    { value: 'full-stack', viewValue: 'Full-Stack' },
-    { value: 'mobile', viewValue: 'Mobile' },
-    { value: 'data-science', viewValue: 'Data Science' },
-    { value: 'devops', viewValue: 'DevOps' }
+    { value: 'Front-end', viewValue: 'Front-End' },        
+    { value: 'Back-end', viewValue: 'Back-End' },         
+    { value: 'Data Science', viewValue: 'Data Science' }, 
+    { value: 'DevOps', viewValue: 'DevOps' },             
+    { value: 'Banco de Dados', viewValue: 'Database' }  
   ];
 
   form: FormGroup;
@@ -48,7 +47,7 @@ export class CourseFormComponent {
     this.form.setValue({
       _id: course._id,
       name: course.name,
-      category: course.category ? course.category.toLowerCase().replace(' ', '-') : ''
+      category: course.category || ''
     });
   }
 
