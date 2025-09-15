@@ -42,7 +42,7 @@ export class CourseFormComponent {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     const course: ICourse = this.route.snapshot.data['course'];
     this.form.setValue({
       _id: course._id,
