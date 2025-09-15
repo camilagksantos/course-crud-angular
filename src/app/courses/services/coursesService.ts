@@ -62,4 +62,19 @@ export class CoursesService {
       catchError(() => of(false))
     );
   }
+
+  listWithLessons(): Observable<ICourse[]> {
+    const url = `${this.apiUrl}/with-lessons`;
+    return this.httpClient.get<ICourse[]>(url)
+      .pipe(
+        delay(1000),
+        take(1)
+      );
+  }
+
+  getByIdWithLessons(id: string): Observable<ICourse> {
+    const url = `${this.apiUrl}/${id}/with-lessons`;
+    return this.httpClient.get<ICourse>(url)
+      .pipe(take(1));
+  }
 }
