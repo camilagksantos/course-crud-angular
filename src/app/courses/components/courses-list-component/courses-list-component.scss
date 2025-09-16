@@ -26,14 +26,17 @@ mat-table {
 .btn-add {
     color: white;
     background-color: #2196f3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
 }
 
 .btn-edit {
     color: #757575;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
 }
 
 .btn-delete {
     color: #f44336;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.227) !important;
 }
 
 @media (max-width: 768px) {
