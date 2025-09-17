@@ -29,7 +29,7 @@ export class Courses {
     this.courses$ = this.coursesService.listWithLessons().pipe(
       tap(courses => console.log('Cursos carregados:', courses)),
       catchError(err => {
-        this.onError('Error loading courses with lessons');
+        this.onError('Erro ao carregar os cursos.');
         return of([]);
       })
     );
@@ -50,27 +50,23 @@ export class Courses {
   }
 
   onDelete(courseId: string): void {
-    if (!courseId) return this.onError('Invalid course ID');
+    if (!courseId) return this.onError('Id do curso inválido.');
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Are you sure you want to delete this course?'
+      data: 'Você tem certeza que deseja remover este curso?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.courses$ = this.coursesService.delete(courseId).pipe(
-          tap(success => {
-            if (success) {
-              this.dialog.open(SuccessDialogComponent, {
-                data: 'Course deleted successfully!'
-              });
-            } else {
-              throw new Error('Error deleting course');
-            }
+          tap(() => {
+            this.dialog.open(SuccessDialogComponent, {
+              data: 'Curso removido com sucesso!'
+            });
           }),
           switchMap(() => this.coursesService.list()),
           catchError(err => {
-            this.onError(err.message || 'Error deleting course');
+            this.onError('Erro ao remover curso');
             return of([]);
           })
         );

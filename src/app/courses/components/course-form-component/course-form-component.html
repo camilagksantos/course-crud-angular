@@ -77,8 +77,15 @@
                                 <mat-label>URL</mat-label>
                                 <span matPrefix>http://youtube.be/</span>
                                 <input matInput formControlName="youtubeUrl">
+                                <mat-hint align="end">{{lesson.get('youtubeUrl')?.value?.length || 0}}/11</mat-hint>
                                 @if (lesson.get('youtubeUrl')?.hasError('required')) {
                                 <mat-error>URL é obrigatória</mat-error>
+                                }
+                                @if (lesson.get('youtubeUrl')?.hasError('minlength')) {
+                                <mat-error>URL deve ter exatamente 11 caracteres</mat-error>
+                                }
+                                @if (lesson.get('youtubeUrl')?.hasError('maxlength')) {
+                                <mat-error>URL deve ter exatamente 11 caracteres</mat-error>
                                 }
                             </mat-form-field>
                         </div>

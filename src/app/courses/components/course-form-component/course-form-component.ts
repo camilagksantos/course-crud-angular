@@ -100,11 +100,11 @@ export class CourseFormComponent {
       this.courseService.save(formValue)
         .subscribe({
           next: (result) => this.onSuccess(result),
-          error: (err) => this.onError('Error saving course'),
+          error: (err) => this.onError('Erro ao salvar curso'),
         });
     } else {
       this.form.markAllAsTouched();
-      this.onError('Please fill all required fields');
+      this.onError('Por favor, preencha o formulário corretamente antes de salvar.');
     }
   }
 
@@ -117,7 +117,7 @@ export class CourseFormComponent {
 
   onSuccess(result: any) {
     this.dialog.open(SuccessDialogComponent, {
-      data: `Course "${result.name}" saved successfully!`
+      data: `Course "${result.name}"Curso salvo com sucesso!`
     });
 
     this.form.reset();
