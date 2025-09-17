@@ -7,6 +7,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CategoryPipePipe implements PipeTransform {
 
   transform(value: string): string {
+
+    if (!value) {
+      return 'school';
+    }
+
     switch (value.toLocaleLowerCase()) {
       case 'front-end':
         return 'code';

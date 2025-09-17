@@ -26,10 +26,10 @@ export class Courses {
   ) { }
 
   ngOnInit() {
-    this.courses$ = this.coursesService.list().pipe(
-      tap(courses => console.log('Cursos carregados:', courses)), // log the loaded courses
+    this.courses$ = this.coursesService.listWithLessons().pipe(
+      tap(courses => console.log('Cursos carregados:', courses)),
       catchError(err => {
-        this.onError('Error loading courses');
+        this.onError('Error loading courses with lessons');
         return of([]);
       })
     );

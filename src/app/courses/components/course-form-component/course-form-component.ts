@@ -20,11 +20,11 @@ export class CourseFormComponent {
 
   categories: ICategory[] = [
     { value: '', viewValue: 'Selecione uma Categoria' },
-    { value: 'Front-end', viewValue: 'Front-End' },        
-    { value: 'Back-end', viewValue: 'Back-End' },         
-    { value: 'Data Science', viewValue: 'Data Science' }, 
-    { value: 'DevOps', viewValue: 'DevOps' },             
-    { value: 'Banco de Dados', viewValue: 'Database' }  
+    { value: 'Front-end', viewValue: 'Front-End' },
+    { value: 'Back-end', viewValue: 'Back-End' },
+    { value: 'Data Science', viewValue: 'Data Science' },
+    { value: 'DevOps', viewValue: 'DevOps' },
+    { value: 'Banco de Dados', viewValue: 'Database' }
   ];
 
   form: FormGroup;
@@ -53,12 +53,13 @@ export class CourseFormComponent {
       category: course.category || ''
     });
 
+    this.lessonsFormArray.clear();
+
     if (course.lessons && course.lessons.length > 0) {
       course.lessons.forEach(lesson => {
         this.addLesson(lesson);
       });
     } else {
-
       this.addLesson();
     }
   }

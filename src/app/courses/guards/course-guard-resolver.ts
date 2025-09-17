@@ -14,9 +14,14 @@ export class CourseGuardResolver implements Resolve<ICourse> {
   ): Observable<ICourse> {
     const courseId = route.paramMap.get('id');
     if (courseId) {
-      return this.service.getById(courseId);
+      return this.service.getByIdWithLessons(courseId);
     }
 
-    return of({ _id: '', name: '', category: '' } as ICourse);
+    return of({
+      _id: '',
+      name: '',
+      category: '',
+      lessons: []
+    } as ICourse);
   }
 }

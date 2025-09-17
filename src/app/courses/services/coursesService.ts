@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ICourse } from '../model/course';
 import { HttpClient } from '@angular/common/http';
 import { catchError, delay, map, Observable, of, take, tap } from 'rxjs';
+import { ICourseWithLessonsResponse } from '../model/course-with-lessons-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CoursesService {
     private readonly httpClient: HttpClient
   ) { }
 
-  list() { 
+  list() {
     return this.httpClient.get<ICourse[]>(this.apiUrl)
       .pipe(
         delay(1000),
@@ -65,8 +66,16 @@ export class CoursesService {
 
   listWithLessons(): Observable<ICourse[]> {
     const url = `${this.apiUrl}/with-lessons`;
-    return this.httpClient.get<ICourse[]>(url)
+    return this.httpClient.get<ICourseWithLessonsResponse[]>(url)
       .pipe(
+        map((response: ICourseWithLessonsResponse[]) => {
+          return response.map(item => ({
+            _id: item.course._id,
+            name: item.course.name,
+            category: item.course.category,
+            lessons: item.lessons || []
+          }));
+        }),
         delay(1000),
         take(1)
       );
@@ -74,7 +83,15 @@ export class CoursesService {
 
   getByIdWithLessons(id: string): Observable<ICourse> {
     const url = `${this.apiUrl}/${id}/with-lessons`;
-    return this.httpClient.get<ICourse>(url)
-      .pipe(take(1));
+    return this.httpClient.get<ICourseWithLessonsResponse>(url)
+      .pipe(
+        map((response: ICourseWithLessonsResponse) => ({
+          _id: response.course._id,
+          name: response.course.name,
+          category: response.course.category,
+          lessons: response.lessons || []
+        })),
+        take(1)
+      );
   }
 }
