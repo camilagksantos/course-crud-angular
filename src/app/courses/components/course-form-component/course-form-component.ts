@@ -82,9 +82,7 @@ export class CourseFormComponent {
   }
 
   removeLesson(index: number): void {
-    if (this.lessonsFormArray.length > 1) {
-      this.lessonsFormArray.removeAt(index);
-    }
+    this.lessonsFormArray.removeAt(index);
   }
 
   addNewLesson(): void {

@@ -40,6 +40,7 @@
 
             <!--Lessons Section-->
             <div class="lessons-section">
+                <!--Lessons Header-->
                 <mat-toolbar class="lessons-toolbar">
                     <span>Aulas</span>
                     <button mat-icon-button class="btn-add" (click)="addNewLesson()" type="button">
@@ -47,12 +48,22 @@
                     </button>
                 </mat-toolbar>
 
-                <!--Lessons Container-->
-                <div formArrayName="lessons" class="lessons-container">
+                <!--Message when no lessons exist-->
+                <div *ngIf="lessonsFormArray.length === 0" class="no-lessons-message">
+                    <mat-icon>school</mat-icon>
+                    <p>Sem aulas até o momento!</p>
+                    <p class="subtitle">Clique no botão + para adicionar a primeira aula.</p>
+                </div>
+
+                <!--Lessons Form Container-->
+                <div *ngIf="lessonsFormArray.length > 0" formArrayName="lessons" class="lessons-container">
+                    <!--Individual Lesson Row-->
                     <div *ngFor="let lesson of lessonsFormArray.controls; let index = index" [formGroupName]="index"
                         class="lesson-row">
 
+                        <!--Lesson Form Fields-->
                         <div class="lesson-fields">
+                            <!--Lesson Name Field-->
                             <mat-form-field class="lesson-name-field">
                                 <mat-label>Aula</mat-label>
                                 <input matInput formControlName="name">
@@ -61,6 +72,7 @@
                                 }
                             </mat-form-field>
 
+                            <!--YouTube URL Field-->
                             <mat-form-field class="lesson-url-field">
                                 <mat-label>URL</mat-label>
                                 <span matPrefix>http://youtube.be/</span>
@@ -71,8 +83,9 @@
                             </mat-form-field>
                         </div>
 
+                        <!--Remove Lesson Button-->
                         <button mat-icon-button class="btn-remove" (click)="removeLesson(index)" type="button"
-                            [disabled]="lessonsFormArray.length <= 1" matTooltip="Remover aula">
+                            matTooltip="Remover aula">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -82,6 +95,7 @@
         </form>
     </mat-card-content>
 
+    <!--Actions Section-->
     <mat-card-actions>
         <button mat-raised-button class="btn-save" (click)="onSubmit()">Salvar</button>
         <button mat-raised-button class="btn-cancel" (click)="onCancel()">Cancelar</button>
