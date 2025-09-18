@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICategory } from '../../model/category';
-import { CoursesService } from '../../services/coursesService';
-import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog-component/error-dialog-component';
+import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
+import { ICategory } from '../../model/category';
 import { ICourse } from '../../model/course';
 import { ILesson } from '../../model/lesson';
+import { CoursesService } from '../../services/coursesService';
 
 
 @Component({
@@ -89,6 +89,18 @@ export class CourseFormComponent {
     this.addLesson();
   }
 
+  validateAllFormFields(formGroup: UntypedFormGroup | UntypedFormArray): void {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof UntypedFormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof UntypedFormGroup || control instanceof UntypedFormArray) {
+        control.markAsTouched({ onlySelf: true });
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
   onSubmit() {
     if (this.form.valid) {
       const formValue = this.form.value;
@@ -103,11 +115,11 @@ export class CourseFormComponent {
           error: (err) => this.onError('Erro ao salvar curso'),
         });
     } else {
-      this.form.markAllAsTouched();
+      this.validateAllFormFields(this.form);
       this.onError('Por favor, preencha o formulário corretamente antes de salvar.');
     }
   }
-
+  
   onCancel() {
     this.form.reset();
     this.lessonsFormArray.clear();
@@ -117,7 +129,7 @@ export class CourseFormComponent {
 
   onSuccess(result: any) {
     this.dialog.open(SuccessDialogComponent, {
-      data: `Course "${result.name}"Curso salvo com sucesso!`
+      data: `Curso "${result.name}" salvo com sucesso!`
     });
 
     this.form.reset();
