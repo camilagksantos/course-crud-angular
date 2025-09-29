@@ -65,3 +65,22 @@ mat-header-cell.mat-column-actions {
     justify-content: center;
     align-items: center;
 }
+
+// Adicione ao final do arquivo
+
+::ng-deep mat-paginator {
+    background-color: white !important;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.401);
+}
+
+::ng-deep .mat-mdc-select-panel {
+    background-color: white !important;
+}
+
+::ng-deep .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+    background-color: rgba(33, 150, 243, 0.12) !important;
+}
+
+::ng-deep .mat-mdc-option:hover {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}

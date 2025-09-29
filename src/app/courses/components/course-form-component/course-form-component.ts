@@ -24,7 +24,12 @@ export class CourseFormComponent {
     { value: Category.BACKEND, viewValue: 'Back-End' },
     { value: Category.DATA_SCIENCE, viewValue: 'Data Science' },
     { value: Category.DEVOPS, viewValue: 'DevOps' },
-    { value: Category.DATABASE, viewValue: 'Database' }  
+    { value: Category.DATABASE, viewValue: 'Database' },
+    { value: Category.MOBILE, viewValue: 'Mobile' },
+    { value: Category.CLOUD, viewValue: 'Cloud Computing' },
+    { value: Category.SECURITY, viewValue: 'Segurança' },
+    { value: Category.DESIGN, viewValue: 'Design' },
+    { value: Category.TESTING, viewValue: 'Testes' }
   ];
 
   form: FormGroup;

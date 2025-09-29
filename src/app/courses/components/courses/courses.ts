@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { catchError, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourse } from '../../model/course';
@@ -7,6 +7,7 @@ import { CoursesService } from '../../services/coursesService';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog-component/error-dialog-component';
 import { SuccessDialogComponent } from '../../../../shared/components/success-dialog-component/success-dialog-component';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog-component/confirmation-dialog-component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-courses',
@@ -18,6 +19,11 @@ export class Courses {
 
   courses$: Observable<ICourse[]> = of([]);
 
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  totalElements: number = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
+
   constructor(
     private readonly coursesService: CoursesService,
     private readonly dialog: MatDialog,
@@ -26,13 +32,28 @@ export class Courses {
   ) { }
 
   ngOnInit() {
-    this.courses$ = this.coursesService.listWithLessons().pipe(
-      tap(courses => console.log('Cursos carregados:', courses)),
+    this.loadCourses();
+  }
+
+  loadCourses() {
+    this.coursesService.listWithLessons(this.pageIndex, this.pageSize).pipe(
       catchError(err => {
         this.onError('Erro ao carregar os cursos.');
-        return of([]);
+        return of({ courses: [], totalElements: 0 });
       })
-    );
+    ).subscribe(response => {
+      this.courses$ = of(response.courses);
+      this.totalElements = response.totalElements;
+      console.log('Total elements:', this.totalElements);
+      console.log('Page index:', this.pageIndex);
+      console.log('Page size:', this.pageSize);
+    });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadCourses();
   }
 
   onError(errorMsg: string) {
@@ -58,18 +79,21 @@ export class Courses {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.courses$ = this.coursesService.delete(courseId).pipe(
+        this.coursesService.delete(courseId).pipe(
           tap(() => {
             this.dialog.open(SuccessDialogComponent, {
               data: 'Curso removido com sucesso!'
             });
           }),
-          switchMap(() => this.coursesService.list()),
+          switchMap(() => {
+            this.loadCourses();
+            return of(true);
+          }),
           catchError(err => {
             this.onError('Erro ao remover curso');
-            return of([]);
+            return of(false);
           })
-        );
+        ).subscribe();
       }
     });
   }

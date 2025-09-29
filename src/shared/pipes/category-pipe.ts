@@ -24,6 +24,16 @@ export class CategoryPipe implements PipeTransform {
         return 'hub';
       case Category.DATABASE:
         return 'storage';
+      case Category.MOBILE:
+        return 'smartphone';
+      case Category.CLOUD:
+        return 'cloud';
+      case Category.SECURITY:
+        return 'security';
+      case Category.DESIGN:
+        return 'palette';
+      case Category.TESTING:
+        return 'bug_report';
       default:
         return 'school';
     }

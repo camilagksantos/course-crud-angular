@@ -2,13 +2,19 @@
     <mat-toolbar>Cursos Disponíveis</mat-toolbar>
 
     <div class="column-flex mat-elevation-z8">
-        <app-courses-list-component
-            *ngIf=" courses$ | async as courses; else spinner"
-            [courses]="courses"
-            (add)="onAdd()"
-            (edit)="onEdit($event)"
-            (delete)="onDelete($event)"
-        ></app-courses-list-component>
+        <app-courses-list-component *ngIf="courses$ | async as courses; else spinner" [courses]="courses"
+            (add)="onAdd()" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-courses-list-component>
+
+        <!-- Paginador -->
+        <mat-paginator 
+            [length]="totalElements" 
+            [pageSize]="pageSize" 
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="pageSizeOptions" 
+            (page)="onPageChange($event)" 
+            showFirstLastButtons>
+        </mat-paginator>
+
         <ng-template #spinner>
             <div class="spinner-container">
                 <mat-spinner diameter="120"></mat-spinner>
