@@ -8,6 +8,7 @@ import { ICategory } from '../../model/category';
 import { ICourse } from '../../model/course';
 import { ILesson } from '../../model/lesson';
 import { CoursesService } from '../../services/coursesService';
+import { Category } from '../../model/category.enum';
 
 
 @Component({
@@ -19,12 +20,11 @@ import { CoursesService } from '../../services/coursesService';
 export class CourseFormComponent {
 
   categories: ICategory[] = [
-    { value: '', viewValue: 'Selecione uma Categoria' },
-    { value: 'Front-end', viewValue: 'Front-End' },
-    { value: 'Back-end', viewValue: 'Back-End' },
-    { value: 'Data Science', viewValue: 'Data Science' },
-    { value: 'DevOps', viewValue: 'DevOps' },
-    { value: 'Banco de Dados', viewValue: 'Database' }
+    { value: Category.FRONTEND, viewValue: 'Front-End' },
+    { value: Category.BACKEND, viewValue: 'Back-End' },
+    { value: Category.DATA_SCIENCE, viewValue: 'Data Science' },
+    { value: Category.DEVOPS, viewValue: 'DevOps' },
+    { value: Category.DATABASE, viewValue: 'Database' }  
   ];
 
   form: FormGroup;

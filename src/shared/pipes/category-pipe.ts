@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Category } from '../../app/courses/model/category.enum';
 
 @Pipe({
   name: 'categoryPipe',
   standalone: false
 })
-export class CategoryPipePipe implements PipeTransform {
+export class CategoryPipe implements PipeTransform {
 
   transform(value: string): string {
 
@@ -12,16 +13,16 @@ export class CategoryPipePipe implements PipeTransform {
       return 'school';
     }
 
-    switch (value.toLocaleLowerCase()) {
-      case 'front-end':
+    switch (value) {
+      case Category.FRONTEND:
         return 'code';
-      case 'back-end':
+      case Category.BACKEND:
         return 'developer_board';
-      case 'data science':
+      case Category.DATA_SCIENCE:
         return 'bar_chart';
-      case 'devops':
+      case Category.DEVOPS:
         return 'hub';
-      case 'banco de dados':
+      case Category.DATABASE:
         return 'storage';
       default:
         return 'school';
