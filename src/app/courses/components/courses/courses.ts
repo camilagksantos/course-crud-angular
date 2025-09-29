@@ -44,9 +44,6 @@ export class Courses {
     ).subscribe(response => {
       this.courses$ = of(response.courses);
       this.totalElements = response.totalElements;
-      console.log('Total elements:', this.totalElements);
-      console.log('Page index:', this.pageIndex);
-      console.log('Page size:', this.pageSize);
     });
   }
 

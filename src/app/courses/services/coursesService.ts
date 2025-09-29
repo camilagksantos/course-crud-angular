@@ -79,7 +79,7 @@ export class CoursesService {
         }));
         return {
           courses: courses,
-          totalElements: response.page.totalElements  // ← Mudança aqui
+          totalElements: response.page.totalElements
         };
       }),
       delay(1000),

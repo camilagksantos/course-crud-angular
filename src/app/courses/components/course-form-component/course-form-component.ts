@@ -133,8 +133,10 @@ export class CourseFormComponent {
   }
 
   onSuccess(result: any) {
+    const courseName = result?.name || this.form.get('name')?.value || 'o curso';
+
     this.dialog.open(SuccessDialogComponent, {
-      data: `Curso "${result.name}" salvo com sucesso!`
+      data: `Curso "${courseName}" salvo com sucesso!`
     });
 
     this.form.reset();
