@@ -333,45 +333,6 @@ The application is fully responsive with breakpoints:
 
 Material Design components automatically adapt to screen sizes.
 
-## 🤝 Contributing
+## Additional Resources
 
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Code Style
-
-- Follow Angular style guide
-- Use TypeScript strict mode
-- Write meaningful commit messages (Conventional Commits)
-- Add comments for complex logic
-- Keep components small and focused
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👤 Author
-
-**Camila Kfouri**
-- GitHub: [@camilagksantos](https://github.com/camilagksantos)
-- LinkedIn: [Camila Kfouri](https://www.linkedin.com/in/camila-kfouri/)
-
-## 🔗 Related Projects
-
-- **Backend API**: [course-crud-spring](https://github.com/camilagksantos/course-crud-spring)
-
-## 🙏 Acknowledgments
-
-- Angular Team for the amazing framework
-- Material Design Team for the UI components
-- RxJS Team for reactive programming tools
-
----
-
-⭐ **If you found this project helpful, please give it a star!** ⭐
-```
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
