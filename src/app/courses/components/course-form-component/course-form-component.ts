@@ -129,7 +129,7 @@ export class CourseFormComponent {
     this.form.reset();
     this.lessonsFormArray.clear();
     this.addLesson();
-    this.router.navigate(['/']);
+    this.router.navigate(['/courses']);
   }
 
   onSuccess(result: any) {
@@ -142,7 +142,7 @@ export class CourseFormComponent {
     this.form.reset();
     this.lessonsFormArray.clear();
     this.addLesson();
-    this.router.navigate(['/']);
+    this.router.navigate(['/courses']);
   }
 
   onError(errorMsg: string) {

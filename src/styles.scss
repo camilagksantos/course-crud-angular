@@ -2,46 +2,539 @@
 
 @include mat.core();
 
+// ========================================
+// 🎨 TEMA PRINCIPAL
+// ========================================
 $theme: mat.define-theme(());
 
 html {
   @include mat.all-component-themes($theme);
-
   height: 100%;
   color-scheme: light;
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 }
 
+// ========================================
+// 🎯 VARIÁVEIS GLOBAIS
+// ========================================
 :root {
-  @include mat.toolbar-overrides((
-    container-background-color: #2196F3,
-    container-text-color: White,
-  ));
+  // Cores principais
+  --primary-color: #2196F3;
+  --primary-dark: #1976D2;
+  --primary-light: #BBDEFB;
+
+  // Cores de ação
+  --success-color: #4CAF50;
+  --warning-color: #FF9800;
+  --danger-color: #F44336;
+
+  // Cores neutras
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+
+  // Backgrounds
+  --bg-light: #F8F9FA;
+  --bg-white: #FFFFFF;
+  --bg-field: rgba(186, 185, 185, 0.149);
+
+  // Sombras
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.227);
+  --shadow-lg: 2px 4px 8px rgba(0, 0, 0, 0.213);
+  --shadow-xl: 2px 4px 8px rgba(0, 0, 0, 0.401);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  // Bordas
+  --border-light: 1px solid #E9ECEF;
+  --border-radius: 4px;
+
+  // Toolbar
+  @include mat.toolbar-overrides((container-background-color: #2196F3,
+      container-text-color: White,
+    ));
 }
 
-body { 
+// ========================================
+// 🌐 RESET E BASE
+// ========================================
+body {
   height: 100%;
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-white);
 }
 
-::ng-deep body,
-::ng-deep .mat-app-background {
-  background-color: white !important;
+body,
+.mat-app-background {
+  background-color: var(--bg-white) !important;
+}
+
+// ========================================
+// 🎴 CARDS GLOBAIS
+// ========================================
+mat-card {
+  display: flex;
+  padding: 16px;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-white) !important;
+  margin: 15px;
+}
+
+// ========================================
+// 🔄 LOADING SPINNER
+// ========================================
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
 }
 
 .mat-mdc-progress-spinner circle,
 .mat-mdc-spinner circle {
-  stroke: #2196F3 !important;
+  stroke: var(--primary-color) !important;
 }
 
-mat-card {
-  display: flex;
-  padding: 16px;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.213);
-  border-radius: 4px;
-  background-color: white !important;
+// ========================================
+// 📋 TABELAS E LISTAS
+// ========================================
+mat-table {
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  background-color: var(--bg-white) !important;
+  overflow: auto;
+  max-height: 600px;
+}
+
+// Força fundo branco em todas as partes da tabela
+.mat-mdc-table,
+.mat-mdc-row,
+.mat-mdc-header-row,
+.mat-mdc-footer-row,
+mat-header-row,
+mat-row,
+mat-footer-row {
+  background-color: var(--bg-white) !important;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell,
+.mat-mdc-footer-cell,
+mat-cell,
+mat-header-cell,
+mat-footer-cell {
+  background-color: transparent !important;
+}
+
+// Colunas da tabela (específico para courses)
+.mat-column-name {
+  flex: 0 0 45%;
+}
+
+.mat-column-category {
+  flex: 0 0 35%;
+}
+
+.mat-column-actions {
+  flex: 0 0 20%;
   text-align: center;
-  margin: 15px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-header-cell.mat-column-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Hover effect nas linhas
+.mat-mdc-row:hover {
+  background-color: var(--gray-50) !important;
+}
+
+// ========================================
+// 📄 PAGINAÇÃO
+// ========================================
+mat-paginator {
+  background-color: var(--bg-white) !important;
+  box-shadow: var(--shadow-xl);
+}
+
+// ========================================
+// 📝 FORM FIELDS
+// ========================================
+.full-width {
+  width: 100%;
+}
+
+.min-width {
+  width: 100%;
+  min-width: 150px;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: var(--bg-field) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: var(--primary-color) !important;
+}
+
+.mat-mdc-form-field .mdc-line-ripple::after {
+  border-bottom-color: var(--primary-color) !important;
+}
+
+// ========================================
+// 🔘 BOTÕES
+// ========================================
+.btn-add {
+  color: white !important;
+  background-color: var(--primary-color) !important;
+  box-shadow: var(--shadow-md) !important;
+
+  &:hover {
+    background-color: var(--primary-dark) !important;
+  }
+}
+
+.btn-save {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  box-shadow: var(--shadow-md) !important;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: var(--primary-dark) !important;
+  }
+}
+
+.btn-cancel {
+  background-color: var(--bg-white) !important;
+  color: var(--primary-color) !important;
+  box-shadow: var(--shadow-md) !important;
+
+  &:hover {
+    background-color: var(--gray-100) !important;
+  }
+}
+
+.btn-edit {
+  color: var(--gray-600) !important;
+  box-shadow: var(--shadow-md) !important;
+
+  &:hover {
+    background-color: var(--gray-100) !important;
+  }
+}
+
+.btn-delete {
+  color: var(--danger-color) !important;
+  box-shadow: var(--shadow-md) !important;
+
+  &:hover {
+    background-color: rgba(244, 67, 54, 0.1) !important;
+  }
+}
+
+.btn-remove {
+  color: var(--danger-color);
+  margin-top: 8px;
+  flex-shrink: 0;
+
+  &:disabled {
+    color: var(--gray-400);
+  }
+
+  &:hover:not(:disabled) {
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+}
+
+// ========================================
+// 🎯 SELECT / DROPDOWN
+// ========================================
+.mat-mdc-select-panel {
+  background-color: var(--bg-white) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+  background-color: rgba(33, 150, 243, 0.12) !important;
+  color: var(--primary-color) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:hover {
+  background-color: rgba(33, 150, 243, 0.73) !important;
+}
+
+.mat-mdc-option:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+// ========================================
+// 📚 SEÇÃO DE LESSONS (FORMULÁRIO)
+// ========================================
+.lessons-section {
+  margin-top: 32px;
+  background-color: var(--bg-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-inset);
+}
+
+.lessons-toolbar {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  margin: 0;
+  padding: 0 20px !important;
+  height: 44px !important;
+  box-shadow: var(--shadow-sm) !important;
+
+  &.mat-toolbar {
+    background-color: var(--primary-color) !important;
+    min-height: 44px !important;
+  }
+
+  span {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+  }
+}
+
+.lessons-container {
+  background-color: var(--bg-light);
+  margin: 0;
+  padding: 24px 20px;
+  min-height: 100px;
+  border-top: var(--border-light);
+}
+
+.no-lessons-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray-600);
+  background-color: var(--bg-light);
+  border-top: var(--border-light);
+
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: var(--gray-400);
+    margin: 0 auto 16px auto;
+    display: block;
+  }
+
+  p {
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+  }
+}
+
+.lesson-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.lesson-fields {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+
+  .lesson-name-field,
+  .lesson-url-field {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+// ========================================
+// 📱 RESPONSIVIDADE
+// ========================================
+@media (max-width: 768px) {
+
+  // Tabelas
+  .mat-column-name {
+    flex: 0 0 40%;
+  }
+
+  .mat-column-category {
+    flex: 0 0 35%;
+  }
+
+  .mat-column-actions {
+    flex: 0 0 25%;
+  }
+
+  // Lessons
+  .lessons-section {
+    margin-top: 24px;
+  }
+
+  .lessons-toolbar {
+    padding: 0 16px !important;
+    height: 42px !important;
+
+    span {
+      font-size: 13px !important;
+    }
+  }
+
+  .lessons-container {
+    padding: 16px;
+  }
+
+  .no-lessons-message {
+    padding: 30px 16px;
+
+    mat-icon {
+      font-size: 40px;
+      height: 40px;
+      width: 40px;
+      margin: 0 auto 12px auto;
+    }
+
+    p {
+      font-size: 15px;
+
+      &.subtitle {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .lesson-fields {
+    flex-direction: column;
+    gap: 0;
+
+    .lesson-name-field,
+    .lesson-url-field {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+  }
+
+  .lesson-row {
+    flex-direction: column;
+    gap: 8px;
+
+    .btn-remove {
+      align-self: flex-end;
+      margin-top: 0;
+    }
+  }
+}
+
+// ========================================
+// 🔧 UTILITIES
+// ========================================
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 8px;
+}
+
+.mt-2 {
+  margin-top: 16px;
+}
+
+.mt-3 {
+  margin-top: 24px;
+}
+
+.mt-4 {
+  margin-top: 32px;
+}
+
+.mb-1 {
+  margin-bottom: 8px;
+}
+
+.mb-2 {
+  margin-bottom: 16px;
+}
+
+.mb-3 {
+  margin-bottom: 24px;
+}
+
+.mb-4 {
+  margin-bottom: 32px;
+}
+
+.p-1 {
+  padding: 8px;
+}
+
+.p-2 {
+  padding: 16px;
+}
+
+.p-3 {
+  padding: 24px;
+}
+
+.p-4 {
+  padding: 32px;
+}
+
+// ========================================
+// 🎨 TOOLBAR
+// ========================================
+mat-toolbar {
+  button {
+    color: white !important;
+
+    mat-icon {
+      color: white !important;
+    }
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
 }

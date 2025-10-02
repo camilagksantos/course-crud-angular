@@ -1,4 +1,93 @@
 <mat-toolbar>
+    <button mat-icon-button (click)="goHome()">
+        <mat-icon>home</mat-icon>
+    </button>
     <span>CRUD Angular + Spring</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="navigateToCourses()">
+        <mat-icon>school</mat-icon>
+        Cursos
+    </button>
 </mat-toolbar>
-<router-outlet></router-outlet>
+
+<!-- HOME PAGE - Aparece quando showHome() é true -->
+<div class="home-page" *ngIf="showHome()">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <mat-icon class="hero-icon">school</mat-icon>
+        <h1 class="hero-title">Plataforma de Gestão de Cursos</h1>
+        <p class="hero-subtitle">
+            Organize e gerencie seus cursos de forma simples e eficiente
+        </p>
+        <button mat-raised-button class="btn-primary-large" (click)="navigateToCourses()">
+            <mat-icon>list</mat-icon>
+            Ver Todos os Cursos
+        </button>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features-container">
+        <mat-card class="feature-card" (click)="navigateToNewCourse()">
+            <mat-icon class="feature-icon">add_circle</mat-icon>
+            <h2 class="feature-title">Criar Cursos</h2>
+            <p class="feature-description">
+                Crie cursos com múltiplas aulas e organize por categorias
+            </p>
+        </mat-card>
+
+        <mat-card class="feature-card" (click)="navigateToNewCourse()">
+            <mat-icon class="feature-icon">video_library</mat-icon>
+            <h2 class="feature-title">Adicionar Aulas</h2>
+            <p class="feature-description">
+                Integre vídeos do YouTube e organize o conteúdo
+            </p>
+        </mat-card>
+
+        <mat-card class="feature-card" (click)="navigateToCourses()">
+            <mat-icon class="feature-icon">category</mat-icon>
+            <h2 class="feature-title">Categorias</h2>
+            <p class="feature-description">
+                10 categorias disponíveis: Frontend, Backend, DevOps e mais
+            </p>
+        </mat-card>
+
+        <mat-card class="feature-card" (click)="navigateToCourses()">
+            <mat-icon class="feature-icon">edit</mat-icon>
+            <h2 class="feature-title">Editar Facilmente</h2>
+            <p class="feature-description">
+                Interface intuitiva para gerenciar todo o conteúdo
+            </p>
+        </mat-card>
+
+        <mat-card class="feature-card" (click)="navigateToCourses()">
+            <mat-icon class="feature-icon">search</mat-icon>
+            <h2 class="feature-title">Pesquisar</h2>
+            <p class="feature-description">
+                Encontre cursos rapidamente com paginação inteligente
+            </p>
+        </mat-card>
+
+        <mat-card class="feature-card" (click)="navigateToCourses()">
+            <mat-icon class="feature-icon">list_alt</mat-icon>
+            <h2 class="feature-title">Organizar</h2>
+            <p class="feature-description">
+                Visualize e organize seus cursos de forma eficiente
+            </p>
+        </mat-card>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+        <h2 class="cta-title">Pronto para começar?</h2>
+        <p class="cta-subtitle">Gerencie seus cursos de forma profissional</p>
+        <button mat-raised-button class="btn-secondary-large" (click)="navigateToCourses()">
+            <mat-icon>arrow_forward</mat-icon>
+            Acessar Plataforma
+        </button>
+    </div>
+
+</div>
+
+<!-- ROUTER OUTLET - Aparece quando não está na home -->
+<router-outlet *ngIf="!showHome()"></router-outlet>

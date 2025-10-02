@@ -1,0 +1,222 @@
+// ========================================
+// 🏠 APP COMPONENT STYLES (Com Home)
+// ========================================
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+// ========================================
+// 🎨 HOME PAGE
+// ========================================
+.home-page {
+    min-height: calc(100vh - 64px);
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 50%, #0D47A1 100%);
+    background-attachment: fixed;
+}
+
+// ========================================
+// 🎯 HERO SECTION
+// ========================================
+.hero-section {
+    text-align: center;
+    padding: 100px 20px 80px;
+    color: white;
+}
+
+.hero-icon {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+
+    @media (max-width: 768px) {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 20px;
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin: 0 0 40px;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+}
+
+.btn-primary-large {
+    background-color: white !important;
+    color: #2196F3 !important;
+    font-size: 1.1rem !important;
+    padding: 16px 40px !important;
+    height: auto !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+        background-color: #f5f5f5 !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
+// ========================================
+// 🎴 FEATURES GRID
+// ========================================
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+    }
+}
+
+.feature-card {
+    padding: 40px 24px !important;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95) !important;
+
+    &:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2) !important;
+
+        .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: #2196F3;
+        }
+    }
+}
+
+.feature-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #1976D2;
+    margin: 0 auto 20px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: #333;
+}
+
+.feature-description {
+    font-size: 1rem;
+    margin: 0;
+    color: #757575;
+    line-height: 1.6;
+}
+
+// ========================================
+// 📢 CALL TO ACTION
+// ========================================
+.cta-section {
+    text-align: center;
+    padding: 80px 20px 100px;
+    color: white;
+
+    @media (max-width: 768px) {
+        padding: 60px 20px 80px;
+    }
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 16px;
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
+}
+
+.cta-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin: 0 0 40px;
+    opacity: 0.95;
+}
+
+.btn-secondary-large {
+    background-color: transparent !important;
+    color: white !important;
+    font-size: 1.1rem !important;
+    padding: 16px 40px !important;
+    height: auto !important;
+    font-weight: 600 !important;
+    border: 2px solid white !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+        background-color: white !important;
+        color: #2196F3 !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
+// ========================================
+// 🔧 TOOLBAR ENHANCEMENTS
+// ========================================
+mat-toolbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    button {
+        mat-icon {
+            margin-right: 4px;
+        }
+    }
+}
