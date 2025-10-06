@@ -35,4 +35,9 @@ export class App {
     this.showHome.set(true);
     this.router.navigate(['/']);
   }
+
+  navigateToSearch(): void {
+    this.showHome.set(false);
+    this.router.navigate(['/courses/search']);
+  }
 }

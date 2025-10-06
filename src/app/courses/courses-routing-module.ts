@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CourseFormComponent } from './components/course-form-component/course-form-component';
 import { Courses } from './components/courses/courses';
 import { CourseGuardResolver } from './guards/course-guard-resolver';
+import { CourseSearchComponent } from './components/course-search-component/course-search-component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'edit/:id',
     component: CourseFormComponent,
     resolve: { course: CourseGuardResolver }
+  },
+  {
+    path: 'search',
+    component: CourseSearchComponent
   }
 ];
 

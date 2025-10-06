@@ -1,0 +1,91 @@
+<div class="search-container">
+    <!-- Toolbar de Pesquisa -->
+    <mat-toolbar class="search-toolbar">
+        <mat-icon>search</mat-icon>
+        <span>Pesquisar Cursos</span>
+    </mat-toolbar>
+
+    <!-- Formulário de Pesquisa -->
+    <mat-card class="search-card">
+        <div class="search-form">
+            <mat-form-field class="search-field" appearance="outline">
+                <mat-label>Buscar por nome</mat-label>
+                <input matInput [(ngModel)]="searchTerm" (input)="onSearchChange($any($event.target).value)"
+                    placeholder="Digite o nome do curso..." autocomplete="off">
+                <mat-icon matPrefix>search</mat-icon>
+                @if (searchTerm) {
+                <button mat-icon-button matSuffix (click)="clearSearch()" aria-label="Limpar busca">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+
+        <div class="results-info">
+            @if (!isLoading) {
+            <span class="results-count">
+                {{ filteredCourses.length }} curso{{ filteredCourses.length !== 1 ? 's' : '' }} encontrado{{
+                filteredCourses.length !== 1 ? 's' : '' }}
+            </span>
+            }
+            @if (searchTerm) {
+            <button mat-stroked-button (click)="clearSearch()">
+                <mat-icon>refresh</mat-icon>
+                Limpar Busca
+            </button>
+            }
+        </div>
+    </mat-card>
+
+    <!-- Loading -->
+    @if (isLoading) {
+    <div class="spinner-container">
+        <mat-spinner diameter="48"></mat-spinner>
+        <p>Carregando cursos...</p>
+    </div>
+    }
+
+    <!-- Tabela de Resultados -->
+    @else if (filteredCourses.length > 0) {
+    <mat-table [dataSource]="filteredCourses" class="search-results-table">
+        <!-- Coluna Nome -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Nome do Curso</mat-header-cell>
+            <mat-cell *matCellDef="let course">{{ course.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Coluna Categoria -->
+        <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+            <mat-cell *matCellDef="let course">
+                <div class="category-cell">
+                    <mat-icon>{{ course.category | categoryPipe }}</mat-icon>
+                    <span>{{ course.category }}</span>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable-row" (click)="onCourseClick(row)">
+        </mat-row>
+    </mat-table>
+    }
+
+    <!-- Estado Vazio -->
+    @else if (!isLoading && filteredCourses.length === 0 && courses.length > 0) {
+    <div class="empty-state">
+        <mat-icon>search_off</mat-icon>
+        <h2>Nenhum curso encontrado</h2>
+        <p>Tente ajustar o termo de busca</p>
+    </div>
+    }
+
+    <!-- Sem Cursos Cadastrados -->
+    @else if (!isLoading && courses.length === 0) {
+    <div class="empty-state">
+        <mat-icon>folder_off</mat-icon>
+        <h2>Nenhum curso cadastrado</h2>
+        <p>Comece criando seu primeiro curso</p>
+    </div>
+    }
+</div>

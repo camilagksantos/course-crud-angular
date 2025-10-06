@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoursesRoutingModule } from './courses-routing-module';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material-module';
 import { SharedModuleModule } from '../../shared/shared-module-module';
@@ -10,20 +10,23 @@ import { CoursesListComponent } from './components/courses-list-component/course
 import { Courses } from './components/courses/courses';
 import { CoursesService } from './services/coursesService';
 import { CourseGuardResolver } from './guards/course-guard-resolver';
+import { CourseSearchComponent } from './components/course-search-component/course-search-component';
 
 
 @NgModule({
   declarations: [
     Courses,
     CourseFormComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    CourseSearchComponent
   ],
   imports: [
     CommonModule,
     CoursesRoutingModule,
     AngularMaterialModule,
     SharedModuleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     CoursesService,

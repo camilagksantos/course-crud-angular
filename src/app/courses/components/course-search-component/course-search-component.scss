@@ -1,0 +1,260 @@
+.search-container {
+    padding: 0;
+    max-width: 100%;
+}
+
+// ========================================
+// 🎨 TOOLBAR
+// ========================================
+.search-toolbar {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    height: 56px;
+    box-shadow: var(--shadow-md);
+
+    mat-icon {
+        margin-right: 12px;
+        color: white !important;
+    }
+
+    span {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+// ========================================
+// 🔍 CARD DE PESQUISA
+// ========================================
+.search-card {
+    margin: 24px !important;
+    padding: 24px !important;
+}
+
+.search-form {
+    margin-bottom: 20px;
+
+    .search-field {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    mat-icon[matPrefix] {
+        margin-right: 8px;
+        color: var(--gray-600);
+    }
+}
+
+.results-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+
+    .results-count {
+        font-size: 14px;
+        color: var(--gray-700);
+        font-weight: 500;
+    }
+
+    button {
+        mat-icon {
+            margin-right: 8px;
+        }
+    }
+}
+
+// ========================================
+// 📋 TABELA DE RESULTADOS
+// ========================================
+.search-results-table {
+    margin: 0 24px 24px 24px;
+    box-shadow: var(--shadow-xl);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+// Colunas específicas
+.mat-column-name {
+    flex: 0 0 60%;
+    padding-left: 24px;
+    font-weight: 500;
+}
+
+.mat-column-category {
+    flex: 0 0 40%;
+}
+
+// Células customizadas
+.category-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    mat-icon {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        color: var(--primary-color);
+    }
+
+    span {
+        font-weight: 500;
+        color: var(--gray-700);
+    }
+}
+
+// Linha clicável
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgba(33, 150, 243, 0.08) !important;
+    }
+
+    &:active {
+        background-color: rgba(33, 150, 243, 0.15) !important;
+    }
+}
+
+// ========================================
+// 🔄 LOADING
+// ========================================
+.spinner-container {
+    margin: 60px 24px;
+
+    p {
+        margin-top: 16px;
+        font-size: 14px;
+        color: var(--gray-600);
+    }
+}
+
+// ========================================
+// 📭 EMPTY STATE
+// ========================================
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    margin: 24px;
+    text-align: center;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+
+    mat-icon {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+        color: var(--gray-300);
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--gray-700);
+        margin: 0 0 8px 0;
+    }
+
+    p {
+        font-size: 16px;
+        color: var(--gray-500);
+        margin: 0;
+    }
+}
+
+// ========================================
+// 📱 RESPONSIVIDADE
+// ========================================
+@media (max-width: 768px) {
+    .search-toolbar {
+        height: 48px;
+
+        mat-icon {
+            margin-right: 8px;
+        }
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    .search-card {
+        margin: 16px !important;
+        padding: 16px !important;
+    }
+
+    .results-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .search-results-table {
+        margin: 0 16px 16px 16px;
+    }
+
+    // Ajuste das colunas para mobile
+    .mat-column-name {
+        flex: 0 0 55%;
+        padding-left: 16px;
+        font-size: 14px;
+    }
+
+    .mat-column-category {
+        flex: 0 0 45%;
+    }
+
+    .category-cell {
+        gap: 8px;
+
+        mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+
+        span {
+            font-size: 13px;
+        }
+    }
+
+    .empty-state {
+        padding: 60px 16px;
+        margin: 16px;
+
+        mat-icon {
+            font-size: 64px;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .mat-column-name {
+        flex: 0 0 55%;
+    }
+
+    .mat-column-category {
+        flex: 0 0 45%;
+    }
+}
