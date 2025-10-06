@@ -1,0 +1,136 @@
+<div class="categories-container">
+    <!-- Toolbar -->
+    <mat-toolbar class="categories-toolbar">
+        @if (selectedCategory) {
+        <button mat-icon-button (click)="backToCategories()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <mat-icon [style.color]="selectedCategory.color">{{ selectedCategory.icon }}</mat-icon>
+        <span>{{ selectedCategory.label }}</span>
+        } @else {
+        <mat-icon>category</mat-icon>
+        <span>Categorias</span>
+        }
+        <span class="spacer"></span>
+        @if (selectedCategory) {
+        <span class="category-count">{{ selectedCategory.coursesCount }} cursos</span>
+        }
+    </mat-toolbar>
+
+    <!-- Loading -->
+    @if (isLoading) {
+    <div class="spinner-container">
+        <mat-spinner diameter="48"></mat-spinner>
+        <p>Carregando categorias...</p>
+    </div>
+    }
+
+    <!-- Grid de Categorias -->
+    @else if (!selectedCategory && categories.length > 0) {
+    <div class="categories-grid">
+        @for (category of categories; track category.key) {
+        <mat-card class="category-card" (click)="onCategoryClick(category)">
+            <div class="card-icon" [style.background-color]="category.color">
+                <mat-icon>{{ category.key | categoryPipe }}</mat-icon>
+            </div>
+            <div class="card-content">
+                <h3>{{ category.label }}</h3>
+                <p class="description">{{ category.description }}</p>
+                <div class="stats">
+                    <span class="stat-item">
+                        <mat-icon>school</mat-icon>
+                        {{ category.coursesCount }} curso{{ category.coursesCount !== 1 ? 's' : '' }}
+                    </span>
+                    <span class="stat-item">
+                        <mat-icon>play_circle_outline</mat-icon>
+                        {{ category.lessonsCount }} aula{{ category.lessonsCount !== 1 ? 's' : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="card-arrow">
+                <mat-icon>chevron_right</mat-icon>
+            </div>
+        </mat-card>
+        }
+    </div>
+    }
+
+    <!-- Detalhes da Categoria Selecionada -->
+    @else if (selectedCategory) {
+    <div class="category-details">
+        <!-- Header da Categoria -->
+        <mat-card class="category-header-card">
+            <div class="header-icon" [style.background-color]="selectedCategory.color">
+                <mat-icon>{{ selectedCategory.icon }}</mat-icon>
+            </div>
+            <div class="header-info">
+                <h2>{{ selectedCategory.label }}</h2>
+                <p>{{ selectedCategory.description }}</p>
+                <div class="header-stats">
+                    <span class="stat-badge">
+                        <mat-icon>school</mat-icon>
+                        {{ selectedCategory.coursesCount }} curso{{ selectedCategory.coursesCount !== 1 ? 's' : '' }}
+                    </span>
+                    <span class="stat-badge">
+                        <mat-icon>play_circle_outline</mat-icon>
+                        {{ selectedCategory.lessonsCount }} aula{{ selectedCategory.lessonsCount !== 1 ? 's' : '' }}
+                    </span>
+                </div>
+            </div>
+            <button mat-raised-button class="btn-add" (click)="addCourseInCategory()">
+                <mat-icon>add</mat-icon>
+                Novo Curso
+            </button>
+        </mat-card>
+
+        <!-- Lista de Cursos -->
+        @if (selectedCategory.coursesCount > 0) {
+        <mat-card class="courses-list-card">
+            <h3>Cursos nesta categoria</h3>
+            <div class="courses-list">
+                @for (course of selectedCategory.courses; track course._id) {
+                <div class="course-item" (click)="onCourseClick(course)">
+                    <div class="course-info">
+                        <span class="course-name">{{ course.name }}</span>
+                        @if (getLessonsCount(course) > 0) {
+                        <span class="lessons-count">
+                            <mat-icon>play_circle_outline</mat-icon>
+                            {{ getLessonsCount(course) }} aula{{ getLessonsCount(course) !== 1 ? 's' : '' }}
+                        </span>
+                        } @else {
+                        <span class="lessons-count empty">
+                            <mat-icon>videocam_off</mat-icon>
+                            Sem aulas
+                        </span>
+                        }
+                    </div>
+                    <button mat-icon-button>
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+                }
+            </div>
+        </mat-card>
+        } @else {
+        <div class="empty-category">
+            <mat-icon>folder_off</mat-icon>
+            <h3>Nenhum curso nesta categoria</h3>
+            <p>Comece adicionando o primeiro curso</p>
+            <button mat-raised-button class="btn-add" (click)="addCourseInCategory()">
+                <mat-icon>add</mat-icon>
+                Adicionar Curso
+            </button>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Empty State -->
+    @else if (!isLoading && categories.length === 0) {
+    <div class="empty-state">
+        <mat-icon>folder_off</mat-icon>
+        <h2>Nenhum curso cadastrado</h2>
+        <p>Comece criando seu primeiro curso</p>
+    </div>
+    }
+</div>

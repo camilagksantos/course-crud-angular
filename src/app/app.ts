@@ -45,4 +45,9 @@ export class App {
     this.showHome.set(false);
     this.router.navigate(['/courses/statistics']);
   }
+
+  navigateToCategories(): void {
+    this.showHome.set(false);
+    this.router.navigate(['/courses/categories']);
+  }
 }
