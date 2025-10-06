@@ -1,0 +1,120 @@
+<div class="organize-container">
+    <!-- Toolbar -->
+    <mat-toolbar class="organize-toolbar">
+        <mat-icon>analytics</mat-icon>
+        <span>Estatísticas dos Cursos</span>
+        <span class="spacer"></span>
+        <span class="total-courses">{{ getTotalCourses() }} cursos</span>
+    </mat-toolbar>
+
+    <!-- Loading -->
+    @if (isLoading) {
+    <div class="spinner-container">
+        <mat-spinner diameter="48"></mat-spinner>
+        <p>Carregando estatísticas...</p>
+    </div>
+    }
+
+    <!-- Dashboard Content -->
+    @else if (courses.length > 0) {
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <mat-card class="summary-card">
+            <mat-icon>school</mat-icon>
+            <div class="card-value">{{ getTotalCourses() }}</div>
+            <div class="card-label">Total de Cursos</div>
+        </mat-card>
+
+        <mat-card class="summary-card">
+            <mat-icon>play_circle_outline</mat-icon>
+            <div class="card-value">{{ getTotalLessons() }}</div>
+            <div class="card-label">Total de Aulas</div>
+        </mat-card>
+
+        <mat-card class="summary-card">
+            <mat-icon>trending_up</mat-icon>
+            <div class="card-value">{{ getAverageLessonsPerCourse() }}</div>
+            <div class="card-label">Média de Aulas/Curso</div>
+        </mat-card>
+
+        <mat-card class="summary-card">
+            <mat-icon>star</mat-icon>
+            <div class="card-value">{{ getMostPopularCategory() }}</div>
+            <div class="card-label">Categoria Mais Popular</div>
+        </mat-card>
+    </div>
+
+    <!-- Pie Chart -->
+    <mat-card class="chart-card">
+        <h2>
+            <mat-icon>pie_chart</mat-icon>
+            Distribuição por Categoria
+        </h2>
+        <div class="chart-container">
+            <canvas #pieChart></canvas>
+        </div>
+    </mat-card>
+
+    <!-- Statistics Table -->
+    <mat-card class="statistics-card">
+        <h2>
+            <mat-icon>analytics</mat-icon>
+            Estatísticas Detalhadas
+        </h2>
+
+        <mat-table [dataSource]="categoryStats" class="statistics-table">
+            <!-- Coluna Ícone -->
+            <ng-container matColumnDef="icon">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let stat">
+                    <div class="icon-cell">
+                        <mat-icon>{{ stat.icon }}</mat-icon>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Coluna Categoria -->
+            <ng-container matColumnDef="category">
+                <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+                <mat-cell *matCellDef="let stat">{{ stat.category }}</mat-cell>
+            </ng-container>
+
+            <!-- Coluna Cursos -->
+            <ng-container matColumnDef="courses">
+                <mat-header-cell *matHeaderCellDef>Cursos</mat-header-cell>
+                <mat-cell *matCellDef="let stat">
+                    <span class="number-cell">{{ stat.coursesCount }}</span>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Coluna Aulas -->
+            <ng-container matColumnDef="lessons">
+                <mat-header-cell *matHeaderCellDef>Aulas</mat-header-cell>
+                <mat-cell *matCellDef="let stat">
+                    <span class="number-cell">{{ stat.lessonsCount }}</span>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Coluna Média -->
+            <ng-container matColumnDef="average">
+                <mat-header-cell *matHeaderCellDef>Média/Curso</mat-header-cell>
+                <mat-cell *matCellDef="let stat">
+                    <span class="average-cell">{{ stat.averageLessons }}</span>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card>
+    }
+
+    <!-- Empty State -->
+    @else if (!isLoading && courses.length === 0) {
+    <div class="empty-state">
+        <mat-icon>folder_off</mat-icon>
+        <h2>Nenhum curso cadastrado</h2>
+        <p>Comece criando seu primeiro curso para ver as estatísticas</p>
+    </div>
+    }
+</div>

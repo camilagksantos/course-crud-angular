@@ -5,6 +5,7 @@ import { CourseFormComponent } from './components/course-form-component/course-f
 import { Courses } from './components/courses/courses';
 import { CourseGuardResolver } from './guards/course-guard-resolver';
 import { CourseSearchComponent } from './components/course-search-component/course-search-component';
+import { CourseOrganizeComponent } from './components/course-organize-component/course-organize-component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: CourseSearchComponent
+  },
+  {
+    path: 'statistics',
+    component: CourseOrganizeComponent
   }
 ];
 

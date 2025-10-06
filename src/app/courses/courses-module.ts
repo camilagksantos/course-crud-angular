@@ -11,6 +11,7 @@ import { Courses } from './components/courses/courses';
 import { CoursesService } from './services/coursesService';
 import { CourseGuardResolver } from './guards/course-guard-resolver';
 import { CourseSearchComponent } from './components/course-search-component/course-search-component';
+import { CourseOrganizeComponent } from './components/course-organize-component/course-organize-component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CourseSearchComponent } from './components/course-search-component/cour
     Courses,
     CourseFormComponent,
     CoursesListComponent,
-    CourseSearchComponent
+    CourseSearchComponent,
+    CourseOrganizeComponent
   ],
   imports: [
     CommonModule,

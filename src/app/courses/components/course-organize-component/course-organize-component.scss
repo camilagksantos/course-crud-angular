@@ -1,0 +1,373 @@
+.organize-container {
+    padding: 0;
+    max-width: 100%;
+    min-height: calc(100vh - 56px);
+    background-color: var(--bg-light);
+}
+
+// ========================================
+// 🎨 TOOLBAR
+// ========================================
+.organize-toolbar {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    height: 56px;
+    box-shadow: var(--shadow-md);
+
+    mat-icon {
+        margin-right: 12px;
+        color: white !important;
+    }
+
+    span {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .total-courses {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 6px 16px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+    }
+}
+
+// ========================================
+// 📊 DASHBOARD LAYOUT
+// ========================================
+.dashboard-content {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+// ========================================
+// 📈 SUMMARY CARDS
+// ========================================
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 0 24px;
+    padding-top: 24px;
+}
+
+.summary-card {
+    padding: 20px !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        color: var(--primary-color);
+        margin-bottom: 12px;
+    }
+
+    .card-value {
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 4px;
+    }
+
+    .card-label {
+        font-size: 14px;
+        color: var(--gray-600);
+        font-weight: 500;
+    }
+}
+
+// ========================================
+// 🥧 CHART CARD
+// ========================================
+.chart-card {
+    padding: 24px !important;
+    margin: 0 24px !important;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        margin: 0 0 20px 0;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--gray-800);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        mat-icon {
+            color: var(--primary-color);
+        }
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// ========================================
+// 📋 STATISTICS TABLE
+// ========================================
+.statistics-card {
+    padding: 24px !important;
+    margin: 0 24px 24px 24px !important;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        margin: 0 0 20px 0;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--gray-800);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        mat-icon {
+            color: var(--primary-color);
+        }
+    }
+}
+
+.statistics-table {
+    width: 100%;
+
+    .mat-column-icon {
+        flex: 0 0 60px;
+        justify-content: center;
+    }
+
+    .mat-column-category {
+        flex: 0 0 40%;
+        font-weight: 500;
+    }
+
+    .mat-column-courses {
+        flex: 0 0 20%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-column-lessons {
+        flex: 0 0 20%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .mat-column-average {
+        flex: 0 0 20%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .icon-cell {
+        display: flex;
+        justify-content: center;
+
+        mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+            color: var(--primary-color);
+        }
+    }
+
+    .number-cell {
+        font-weight: 500;
+        color: var(--gray-700);
+    }
+
+    .average-cell {
+        font-weight: 500;
+        color: var(--success-color);
+    }
+}
+
+// ========================================
+// 🔄 LOADING
+// ========================================
+.spinner-container {
+    margin: 60px 24px;
+
+    p {
+        margin-top: 16px;
+        font-size: 14px;
+        color: var(--gray-600);
+    }
+}
+
+// ========================================
+// 📭 EMPTY STATE
+// ========================================
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    margin: 24px;
+    text-align: center;
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius);
+
+    mat-icon {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+        color: var(--gray-300);
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--gray-700);
+        margin: 0 0 8px 0;
+    }
+
+    p {
+        font-size: 16px;
+        color: var(--gray-500);
+        margin: 0;
+    }
+}
+
+// ========================================
+// 📱 RESPONSIVIDADE
+// ========================================
+@media (max-width: 768px) {
+    .organize-toolbar {
+        height: 48px;
+
+        mat-icon {
+            margin-right: 8px;
+        }
+
+        span {
+            font-size: 16px;
+        }
+
+        .total-courses {
+            font-size: 12px;
+            padding: 4px 12px;
+        }
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .summary-card {
+        padding: 16px !important;
+
+        mat-icon {
+            font-size: 40px;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 28px;
+        }
+
+        .card-label {
+            font-size: 13px;
+        }
+    }
+
+    .chart-card,
+    .statistics-card {
+        margin: 0 16px 16px 16px !important;
+        padding: 16px !important;
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .chart-container {
+        height: 250px !important;
+    }
+
+    // Simplifica tabela no mobile
+    .statistics-table {
+        .mat-column-icon {
+            flex: 0 0 50px;
+        }
+
+        .mat-column-category {
+            flex: 0 0 45%;
+            font-size: 14px;
+        }
+
+        .mat-column-courses,
+        .mat-column-lessons {
+            flex: 0 0 20%;
+            font-size: 13px;
+        }
+
+        .mat-column-average {
+            display: none; // Esconde média no mobile
+        }
+
+        .icon-cell mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .empty-state {
+        padding: 60px 16px;
+        margin: 16px;
+
+        mat-icon {
+            font-size: 64px;
+            width: 64px;
+            height: 64px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .summary-cards {
+        gap: 16px;
+    }
+
+    .chart-card,
+    .statistics-card {
+        margin: 0 20px 20px 20px !important;
+    }
+}
